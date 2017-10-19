@@ -1,21 +1,44 @@
-import {Button, FlatList, StyleSheet, Text, View} from 'react-native'
+import {
+    TouchableHighlight,
+    Button,
+    FlatList,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native'
 import React, {Component} from 'react'
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: "white"
     },
     item: {
         padding: 10,
-        fontSize: 18,
-        height: 44
+        height: 60,
+        justifyContent: "center"
+    },
+    separator: {
+        height: 1,
+        backgroundColor: '#EFEFEF'
     }
 })
 function Separator(props) {
-    return (<View style={{
-        height: 1,
-        backgroundColor: 'black'
-    }}/>);
+    return (<View style={styles.separator}/>);
 }
+const listData = [
+    {
+        title: '切换页面传值',
+        uri: 'Profile',
+        key: 1,
+        data: {
+            name: "jane"
+        }
+    }, {
+        title: 'scrollView',
+        uri: 'ScrollView',
+        key: 2
+    }
+]
 class MainScreen extends Component {
     static navigationOptions = {
         title: 'Index'
@@ -26,29 +49,25 @@ class MainScreen extends Component {
             <View style={styles.container}>
                 <FlatList
                     ItemSeparatorComponent={Separator}
-                    data={[
-                    {
-                        key: 'Devin'
-                    }, {
-                        key: 'Jackson'
-                    }, {
-                        key: 'James'
-                    }, {
-                        key: 'Joel'
-                    }, {
-                        key: 'John'
-                    }, {
-                        key: 'Jillian'
-                    }, {
-                        key: 'Jimmy'
-                    }, {
-                        key: 'Julie'
-                    }
-                ]}
-                    renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}/>
+                    data={listData}
+                    renderItem={({item}) => {
+                    return (
+                        <TouchableHighlight
+                            underlayColor="#EFEFEF"
+                            style={styles.item}
+                            onPress={() => {
+                            navigate(item.uri, {data: item.data});
+                        }}>
+                            <Text
+                                style={{
+                                textAlign: 'center',
+                                fontSize: 20
+                            }}>{item.title}</Text>
+                        </TouchableHighlight>
+                    );
+                }}/>
             </View>
         )
     }
 }
-
 export default MainScreen;

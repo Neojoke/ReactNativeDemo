@@ -3,15 +3,17 @@ import {View, Text} from 'react-native'
 class ProfileScreen extends Component {
 
     render() {
+        const {name} = this.props.navigation.state.params.data;
         const styles = {
             container: {
                 flex: 1,
-                backgroundColor: "blue"
+                justifyContent: "center",
+                alignItems: "center"
             }
         }
         return (
             <View style={styles.container}>
-                <Text>{this.props.name}</Text>
+                <Text>{"Name is:" + name}</Text>
             </View>
         );
     }
