@@ -3,6 +3,7 @@ import {ScrollView, StyleSheet, Text, Image} from 'react-native'
 class ScrollViewDemo extends Component {
     render() {
         const items = Array();
+
         for (let i = 0; i < 40; i++) {
             items.push(
                 <Image
